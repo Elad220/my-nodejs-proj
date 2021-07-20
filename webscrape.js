@@ -16,7 +16,7 @@ const app = http.createServer((req, resp) => {
             const articleText = article.children().first().text();
             console.log(output);
             console.log(articleText);
-            resp.writeHead(200, {"Content-Type": "text/html"});
+            resp.writeHead(200, {"Content-Type": "text/plain"});
             resp.write(output + '\n' + articleText);
             resp.end();
         }
@@ -32,6 +32,9 @@ const app = http.createServer((req, resp) => {
             const articleText = article.first().text();
             console.log(output);
             console.log(articleText);
+            resp.writeHead(200, {"Content-Type": "text/plain"});
+            resp.write(output + '\n' + articleText);
+            resp.end();
         }
 
     });
