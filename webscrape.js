@@ -1,8 +1,6 @@
 const request= require("request-promise")
 const cheerio= require("cheerio");
-const { head } = require("request-promise");
 const http = require("http");
-const host = 'localhost';
 const port = 8080;
 var output = "";
 var articleText = "";
