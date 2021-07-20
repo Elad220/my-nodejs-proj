@@ -23,13 +23,13 @@ const app = http.createServer((req, resp) => {
         }
 
     });
-    request("https://www.ynet.co.il/home/0,7340,L-8,00.html", (error, response, html) => {
+    request("https://www.wsj.com/news/world?mod=djmc_DGWorld&gclsrc=aw.ds&gclid=Cj0KCQjw6NmHBhD2ARIsAI3hrM0TUSmGm5UQ2qJJN3Mq05MbRlopH4ydrbGIQtf1X1pujDipMfrmZfsaAmDCEALw_wcB", (error, response, html) => {
         if(!error && response.statusCode==200) 
         {
             const $= cheerio.load(html);
-            const headline= $('h1');
-            output1 = headline.text();
-            const article= $("div.slotSubTitle");
+            const headline= $('h2');
+            output1 = headline.children().first().text();
+            const article= $("p");
             articleText1 = article.children().first().text();
             console.log(output1);
             console.log(articleText1);
@@ -37,7 +37,7 @@ const app = http.createServer((req, resp) => {
 
     });
     resp.writeHead(200, {"Content-Type": "text/plain"});
-    resp.write(output + '\n' + articleText + output1 + '\n' + articleText1);
+    resp.write(output + '\n' + articleText + '\n' + '\n' + output1 + '\n' + '\n' + articleText1);
     resp.end();
 });
 console.log("Starting server..");
