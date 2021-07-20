@@ -4,6 +4,11 @@ const { head } = require("request-promise");
 const http = require("http");
 const host = 'localhost';
 const port = 8080;
+var output = "";
+var articleText = "";
+var output1 = "";
+var articleText1 = "";
+
 
 const app = http.createServer((req, resp) => {
     
@@ -12,13 +17,11 @@ const app = http.createServer((req, resp) => {
         {
             const $= cheerio.load(html);
             const headline= $('h3');
-            const output = headline.first().text();
+            output = headline.first().text();
             const article= $("p");
-            const articleText = article.first().text();
+            articleText = article.first().text();
             console.log(output);
             console.log(articleText);
-            resp.writeHead(200, {"Content-Type": "text/plain"});
-            resp.writeContinue(output + '\n' + articleText);
         }
 
     });
@@ -27,17 +30,17 @@ const app = http.createServer((req, resp) => {
         {
             const $= cheerio.load(html);
             const headline= $('h1');
-            const output = headline.text();
+            output1 = headline.text();
             const article= $("div.slotSubTitle");
-            const articleText = article.children().first().text();
-            console.log(output);
-            console.log(articleText);
-            resp.writeHead(200, {"Content-Type": "text/plain"});
-            resp.write(output + '\n' + articleText);
-            resp.end();
+            articleText1 = article.children().first().text();
+            console.log(output1);
+            console.log(articleText1);
         }
 
     });
+    resp.writeHead(200, {"Content-Type": "text/plain"});
+    resp.write(output + '\n' + articleText + output1 + '\n' + articleText1);
+    resp.end();
 });
-console.log("Starting server..")
+console.log("Starting server..");
 app.listen(port);
