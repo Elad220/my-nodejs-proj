@@ -35,7 +35,7 @@ const app = http.createServer((req, resp) => {
             console.log(articleText1);
         }
 
-    });
+    }); 
     resp.writeHead(200, {"Content-Type": "text/plain"});
     resp.write(output + '\n' + articleText + '\n' + '\n' + output1 + '\n' + '\n' + articleText1);
     resp.end();
